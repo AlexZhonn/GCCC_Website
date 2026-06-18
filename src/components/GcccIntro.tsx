@@ -36,10 +36,10 @@ export default function GcccIntro({
 
   useEffect(() => {
     if (!shouldPlay) return;
-    // Matches the fade-out delay (4.7s) + duration (0.9s) in GcccIntro.css => 5.6s
+    // Matches the fade-out delay (3.5s) + duration (0.35s) in GcccIntro.css => 3.85s
     const t = setTimeout(() => {
       onDone?.();
-    }, 5600);
+    }, 3900);
     return () => clearTimeout(t);
   }, [shouldPlay, onDone]);
 
@@ -55,8 +55,8 @@ export default function GcccIntro({
       <div className="gccc-intro__lockup">
         <svg
           className="gccc-intro__mark"
-          width="200"
-          height="218"
+          width="400"
+          height="436"
           viewBox="0 0 220 232"
           xmlns="http://www.w3.org/2000/svg"
         >
