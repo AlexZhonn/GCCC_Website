@@ -1,0 +1,6 @@
+{
+  "name": "GCCC Gainesville",
+  "description": "Rebuilding the Gainesville Chinese Christian Church (GCCC) website. Includes a high-fidelity interactive homepage, bilingual EN/ZH support, and the signature stroke-by-stroke intro logo animation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
