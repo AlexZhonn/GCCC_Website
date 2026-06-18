@@ -1,3 +1,12 @@
+/**
+ * src/data.ts
+ *
+ * Static fallback fixtures used when VITE_CMS_URL is not configured.
+ * Once Payload CMS is running, the app loads live data via src/lib/cms.ts.
+ *
+ * Migration status: static fixtures kept as fallback.
+ * Live fetch functions are exported from src/lib/cms.ts.
+ */
 import { Sermon, Fellowship, SiteSettings } from "./types";
 
 export const siteSettings: SiteSettings = {
@@ -280,3 +289,8 @@ export const fellowshipsData: Fellowship[] = [
     imageUrl: "https://picsum.photos/seed/gathering/600/400",
   },
 ];
+
+// ─── Re-export live CMS fetch functions ───────────────────────────────────────
+// When VITE_CMS_URL is set these fetch from Payload; otherwise they return null
+// and the app falls back to the static exports above.
+export { getSermons, getFellowships, getSiteSettings } from "./lib/cms";
