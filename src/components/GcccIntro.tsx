@@ -46,7 +46,12 @@ export default function GcccIntro({
   if (!mounted || !shouldPlay) return null;
 
   return (
-    <div className="gccc-intro" role="presentation" aria-hidden="true" id="gccc_intro_screen">
+    <div
+      className="gccc-intro"
+      role="presentation"
+      aria-hidden="true"
+      id="gccc_intro_screen"
+    >
       <div className="gccc-intro__lockup">
         <svg
           className="gccc-intro__mark"
@@ -117,11 +122,8 @@ export default function GcccIntro({
           />
 
           {/* 7. Inward horizontal arm — independent final stroke from centerline outward, drawn last */}
-          <path
-            className="s s--garm"
-            pathLength={1}
-            d="M110 112 L168 112"
-          />
+          <path className="s s--garm" pathLength={1} d="M189 109 L120 109" />
+
         </svg>
 
         {/* 8. Wordmark (甘城華人教會 / Gainesville Chinese Christian Church) fades in beneath the mark */}
