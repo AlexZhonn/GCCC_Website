@@ -21,7 +21,9 @@ export default function MinistryDetailPage({
   onBack,
 }: MinistryDetailPageProps) {
   const catInfo = ministryCategoriesData.find((c) => c.id === category);
-  const fellowships = fellowshipsData.filter((f) => f.ministryCategory === category);
+  const fellowships = fellowshipsData.filter(
+    (f) => f.ministryCategory === category,
+  );
 
   if (!catInfo) return null;
 
@@ -58,7 +60,6 @@ export default function MinistryDetailPage({
 
       <section className="bg-[#eeecec] px-4 sm:px-6 lg:px-8 py-10">
         <div className="max-w-7xl mx-auto flex flex-col gap-6">
-
           {/* DESCRIPTION CARD */}
           <div className="bg-white rounded-2xl border border-[#E7B7A0]/20 shadow-sm px-8 py-8">
             <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#33271E] mb-4">
@@ -73,7 +74,9 @@ export default function MinistryDetailPage({
           {fellowships.length === 0 ? (
             <div className="bg-white rounded-2xl border border-[#E7B7A0]/20 p-10 text-center shadow-sm">
               <p className="font-serif text-xl text-[#33271E] font-semibold mb-2">
-                {currentLang === "en" ? "Resources Coming Soon" : "資源即將上線"}
+                {currentLang === "en"
+                  ? "Resources Coming Soon"
+                  : "資源即將上線"}
               </p>
               <p className="text-sm text-[#6F685B] font-sans leading-relaxed max-w-md mx-auto">
                 {currentLang === "en"

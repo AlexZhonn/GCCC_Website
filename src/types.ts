@@ -1,8 +1,25 @@
-export type Language = 'en' | 'zh';
+export type Language = "en" | "zh";
 
-export type Page = 'home' | 'about' | 'sermons' | 'fellowships' | 'calendar' | 'contact' | 'give' | 'announcements' | 'prayer' | 'gainesville-dew';
+export type Page =
+  | "home"
+  | "about"
+  | "sermons"
+  | "fellowships"
+  | "calendar"
+  | "contact"
+  | "give"
+  | "announcements"
+  | "prayer"
+  | "gainesville-dew"
+  | "leadership";
 
-export type MinistryCategory = 'kids' | 'youth' | 'college' | 'adults' | 'senior-adults' | 'discipleship';
+export type MinistryCategory =
+  | "kids"
+  | "youth"
+  | "college"
+  | "adults"
+  | "senior-adults"
+  | "discipleship";
 
 export interface MinistryCategoryInfo {
   id: MinistryCategory;
@@ -51,10 +68,10 @@ export interface Activity {
   fellowship: { [key in Language]: string };
   title: { [key in Language]: string };
   description?: { [key in Language]: string };
-  date: string;       // YYYY-MM-DD
-  time?: string;      // e.g. "6:30 PM"
+  date: string; // YYYY-MM-DD
+  time?: string; // e.g. "6:30 PM"
   location?: { [key in Language]: string };
-  photos: string[];   // first photo is the hero
+  photos: string[]; // first photo is the hero
 }
 
 export interface Fellowship {

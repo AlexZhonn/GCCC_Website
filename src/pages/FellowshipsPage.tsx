@@ -43,12 +43,12 @@ export default function FellowshipsPage({
 
       {/* CATEGORY CARDS */}
       <section className="py-16 bg-[#eeecec] px-4 sm:px-6 lg:px-8 min-h-screen">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {ministryCategoriesData.map((cat) => (
             <button
               key={cat.id}
               onClick={() => onSelectCategory(cat.id)}
-              className="group relative rounded-2xl overflow-hidden shadow-md aspect-4/3 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black"
+              className="group relative rounded-2xl overflow-hidden shadow-md aspect-square text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black"
             >
               {/* Background image */}
               <img
@@ -60,14 +60,8 @@ export default function FellowshipsPage({
               <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-black/10 group-hover:via-black/40 transition-all duration-300" />
 
               {/* Content */}
-              <div className="absolute inset-x-0 bottom-0 p-6 flex flex-col justify-end text-white z-10">
-                <span
-                  className="text-[10px] uppercase font-mono tracking-widest font-bold mb-1.5"
-                  style={{ color: cat.color }}
-                >
-                  {cat.ageRange[currentLang]}
-                </span>
-                <h3 className="font-serif text-2xl font-bold leading-tight group-hover:text-amber-100 transition-colors">
+              <div className="absolute inset-x-0 bottom-0 p-7 flex flex-col justify-end text-white z-10">
+                <h3 className="font-serif text-3xl font-bold leading-tight group-hover:text-amber-100 transition-colors">
                   {cat.label[currentLang]}
                 </h3>
                 <div className="mt-3 flex items-center text-xs font-semibold text-white/70 group-hover:text-white group-hover:translate-x-1 transition-all duration-300">

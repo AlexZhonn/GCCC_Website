@@ -12,7 +12,7 @@ export default function AboutPage({ currentLang }: AboutPageProps) {
     <>
       {/* HERO */}
       <section
-        className="relative h-[55vh] min-h-[340px] flex items-end pt-20 bg-cover bg-center"
+        className="relative h-[75vh] min-h-[500px] flex items-end pt-20 bg-cover bg-center"
         style={{ backgroundImage: `url("/images/aboutus.jpg")` }}
       >
         <div className="absolute inset-0 bg-neutral-900/55" />

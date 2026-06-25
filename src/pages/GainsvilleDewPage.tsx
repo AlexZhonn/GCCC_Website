@@ -17,23 +17,29 @@ interface DewIssue {
 // Add your PDF issues here — replace the placeholder URLs with actual PDF paths (e.g. "/pdfs/gainesville-dew-2024-01.pdf")
 const dewIssues: DewIssue[] = [
   {
-    id: "2024-12",
-    title: { en: "Gainesville Dew — December 2024", zh: "甘城甘露 — 2024 年 12 月" },
-    date: "2024-12-01",
-    pdfUrl: "/pdfs/gainesville-dew-2024-12.pdf",
+    id: "2026-03",
+    title: {
+      en: "Gainesville Dew — March 2026",
+      zh: "甘城甘露 — 2026 年 3 月",
+    },
+    date: "2026-03-01",
+    pdfUrl: "/pdfs/GainesvilleDew2026-03.pdf",
     description: {
-      en: "December 2024 issue of the Gainesville Dew newsletter.",
-      zh: "2024 年 12 月甘城甘露電子報。",
+      en: "2026 March Gainesville Dew",
+      zh: "2026 年 3 月甘露",
     },
   },
   {
-    id: "2024-11",
-    title: { en: "Gainesville Dew — November 2024", zh: "甘城甘露 — 2024 年 11 月" },
-    date: "2024-11-01",
-    pdfUrl: "/pdfs/gainesville-dew-2024-11.pdf",
+    id: "2009",
+    title: {
+      en: "20th Anniversary",
+      zh: "建堂二十週年紀念",
+    },
+    date: "2009",
+    pdfUrl: "/pdfs/20th_anniversary.pdf",
     description: {
-      en: "November 2024 issue of the Gainesville Dew newsletter.",
-      zh: "2024 年 11 月甘城甘露電子報。",
+      en: "20th Anniversary commemorative issue",
+      zh: "建堂二十週年紀念特刊",
     },
   },
 ];
@@ -46,9 +52,11 @@ function formatDate(dateStr: string, lang: Language) {
   });
 }
 
-export default function GainsvilleDewPage({ currentLang }: GainsvilleDewPageProps) {
+export default function GainsvilleDewPage({
+  currentLang,
+}: GainsvilleDewPageProps) {
   const [expandedId, setExpandedId] = useState<string | null>(
-    dewIssues.length > 0 ? dewIssues[0].id : null
+    dewIssues.length > 0 ? dewIssues[0].id : null,
   );
 
   const t = {
@@ -85,7 +93,9 @@ export default function GainsvilleDewPage({ currentLang }: GainsvilleDewPageProp
       {/* ISSUES LIST */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
         {dewIssues.length === 0 ? (
-          <p className="text-center text-gray-500 py-20">{t.noIssues[currentLang]}</p>
+          <p className="text-center text-gray-500 py-20">
+            {t.noIssues[currentLang]}
+          </p>
         ) : (
           <div className="space-y-4">
             {dewIssues.map((issue) => {
@@ -132,13 +142,29 @@ export default function GainsvilleDewPage({ currentLang }: GainsvilleDewPageProp
                       )}
 
                       {/* PDF embed */}
-                      <div className="rounded-xl overflow-hidden border border-black/10 bg-gray-50" style={{ height: "600px" }}>
-                        <iframe
-                          src={issue.pdfUrl}
-                          title={issue.title[currentLang]}
+                      <div
+                        className="rounded-xl overflow-hidden border border-black/10 bg-gray-50"
+                        style={{ height: "600px" }}
+                      >
+                        <object
+                          data={issue.pdfUrl}
+                          type="application/pdf"
                           className="w-full h-full"
-                          style={{ border: "none" }}
-                        />
+                        >
+                          <div className="flex flex-col items-center justify-center h-full gap-3 text-gray-500 text-sm p-8 text-center">
+                            <FileText className="w-10 h-10 text-gray-300" />
+                            <p>{currentLang === "en" ? "Your browser cannot display this PDF inline." : "您的瀏覽器無法直接顯示此 PDF。"}</p>
+                            <a
+                              href={issue.pdfUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 text-sm font-semibold text-[#9A2B27] hover:text-[#7a2220] transition-colors"
+                            >
+                              <ExternalLink className="w-4 h-4" />
+                              {currentLang === "en" ? "Download PDF" : "下載 PDF"}
+                            </a>
+                          </div>
+                        </object>
                       </div>
 
                       {/* Open in new tab link */}

@@ -14,6 +14,7 @@ import AnnouncementsPage from "./pages/AnnouncementsPage";
 import PrayerPage from "./pages/PrayerPage";
 import MinistryDetailPage from "./pages/MinistryDetailPage";
 import GainsvilleDewPage from "./pages/GainsvilleDewPage";
+import LeadershipPage from "./pages/LeadershipPage";
 import {
   Heart,
   CheckCircle,
@@ -34,6 +35,7 @@ const PAGE_TO_PATH: Record<Page, string> = {
   announcements: "/announcements",
   prayer: "/prayer",
   "gainesville-dew": "/gainesville-dew",
+  leadership: "/leadership",
 };
 
 const PATH_TO_PAGE: Record<string, Page> = {
@@ -47,6 +49,7 @@ const PATH_TO_PAGE: Record<string, Page> = {
   "/announcements": "announcements",
   "/prayer": "prayer",
   "/gainesville-dew": "gainesville-dew",
+  "/leadership": "leadership",
 };
 
 const MINISTRY_CATEGORY_PATHS: Record<string, MinistryCategory> = {
@@ -186,6 +189,8 @@ export default function App() {
         return <PrayerPage currentLang={currentLang} />;
       case "gainesville-dew":
         return <GainsvilleDewPage currentLang={currentLang} />;
+      case "leadership":
+        return <LeadershipPage currentLang={currentLang} />;
     }
   };
 

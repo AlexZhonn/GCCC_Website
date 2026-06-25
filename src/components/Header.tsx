@@ -125,11 +125,15 @@ export default function Header({
             <button
               onClick={() => handleNav("home")}
               className={`font-sans text-base font-medium px-3 py-2 rounded-md transition-colors relative group ${
-                currentPage === "home" ? "text-black" : "text-gray-600 hover:text-black"
+                currentPage === "home"
+                  ? "text-black"
+                  : "text-gray-600 hover:text-black"
               }`}
             >
               {t.navHome[currentLang]}
-              <span className={`absolute bottom-1 left-3 right-3 h-[2px] bg-black transition-transform duration-300 origin-center ${currentPage === "home" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`} />
+              <span
+                className={`absolute bottom-1 left-3 right-3 h-[2px] bg-black transition-transform duration-300 origin-center ${currentPage === "home" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+              />
             </button>
 
             {/* About Us dropdown */}
@@ -137,12 +141,18 @@ export default function Header({
               <button
                 onClick={() => setAboutDropdownOpen((o) => !o)}
                 className={`font-sans text-base font-medium px-3 py-2 rounded-md transition-colors relative group flex items-center gap-1 ${
-                  currentPage === "about" || currentPage === "gainesville-dew" ? "text-black" : "text-gray-600 hover:text-black"
+                  currentPage === "about" || currentPage === "gainesville-dew" || currentPage === "leadership"
+                    ? "text-black"
+                    : "text-gray-600 hover:text-black"
                 }`}
               >
                 {t.navAbout[currentLang]}
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${aboutDropdownOpen ? "rotate-180" : ""}`} />
-                <span className={`absolute bottom-1 left-3 right-3 h-[2px] bg-black transition-transform duration-300 origin-center ${currentPage === "about" || currentPage === "gainesville-dew" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`} />
+                <ChevronDown
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${aboutDropdownOpen ? "rotate-180" : ""}`}
+                />
+                <span
+                  className={`absolute bottom-1 left-3 right-3 h-[2px] bg-black transition-transform duration-300 origin-center ${currentPage === "about" || currentPage === "gainesville-dew" || currentPage === "leadership" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                />
               </button>
               {aboutDropdownOpen && (
                 <div className="absolute left-0 top-full mt-1 w-48 bg-white rounded-xl shadow-lg border border-black/8 overflow-hidden py-1 animate-fade-in">
@@ -153,7 +163,7 @@ export default function Header({
                     {currentLang === "en" ? "Our Story" : "教會歷史"}
                   </button>
                   <button
-                    onClick={() => handleNav("about")}
+                    onClick={() => handleNav("leadership")}
                     className={`w-full text-left px-4 py-2.5 text-sm font-sans hover:bg-black/5 hover:text-black transition-colors ${currentPage === "about" ? "text-black font-semibold" : "text-gray-700"}`}
                   >
                     {currentLang === "en" ? "Leadership" : "牧師同工"}
@@ -172,11 +182,15 @@ export default function Header({
             <button
               onClick={() => handleNav("fellowships")}
               className={`font-sans text-base font-medium px-3 py-2 rounded-md transition-colors relative group ${
-                currentPage === "fellowships" ? "text-black" : "text-gray-600 hover:text-black"
+                currentPage === "fellowships"
+                  ? "text-black"
+                  : "text-gray-600 hover:text-black"
               }`}
             >
               {t.navFellowships[currentLang]}
-              <span className={`absolute bottom-1 left-3 right-3 h-[2px] bg-black transition-transform duration-300 origin-center ${currentPage === "fellowships" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`} />
+              <span
+                className={`absolute bottom-1 left-3 right-3 h-[2px] bg-black transition-transform duration-300 origin-center ${currentPage === "fellowships" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+              />
             </button>
 
             {/* Events dropdown */}
@@ -226,7 +240,9 @@ export default function Header({
               <button
                 onClick={() => setConnectDropdownOpen((o) => !o)}
                 className={`font-sans text-base font-medium px-3 py-2 rounded-md transition-colors relative group flex items-center gap-1 ${
-                  currentPage === "contact" || currentPage === "give" || currentPage === "prayer"
+                  currentPage === "contact" ||
+                  currentPage === "give" ||
+                  currentPage === "prayer"
                     ? "text-black"
                     : "text-gray-600 hover:text-black"
                 }`}
@@ -237,7 +253,9 @@ export default function Header({
                 />
                 <span
                   className={`absolute bottom-1 left-3 right-3 h-[2px] bg-black transition-transform duration-300 origin-center ${
-                    currentPage === "contact" || currentPage === "give" || currentPage === "prayer"
+                    currentPage === "contact" ||
+                    currentPage === "give" ||
+                    currentPage === "prayer"
                       ? "scale-x-100"
                       : "scale-x-0 group-hover:scale-x-100"
                   }`}
@@ -327,7 +345,9 @@ export default function Header({
           <button
             onClick={() => handleNav("home")}
             className={`block w-full text-left px-4 py-2.5 rounded-md text-base font-medium transition-all ${
-              currentPage === "home" ? "bg-black/10 text-black" : "text-gray-600 hover:bg-black/5 hover:text-black"
+              currentPage === "home"
+                ? "bg-black/10 text-black"
+                : "text-gray-600 hover:bg-black/5 hover:text-black"
             }`}
           >
             {t.navHome[currentLang]}
@@ -338,11 +358,15 @@ export default function Header({
             <button
               onClick={() => setMobileAboutOpen((o) => !o)}
               className={`flex w-full items-center justify-between px-4 py-2.5 rounded-md text-base font-medium transition-all ${
-                currentPage === "about" || currentPage === "gainesville-dew" ? "bg-black/10 text-black" : "text-gray-600 hover:bg-black/5 hover:text-black"
+                currentPage === "about" || currentPage === "gainesville-dew" || currentPage === "leadership"
+                  ? "bg-black/10 text-black"
+                  : "text-gray-600 hover:bg-black/5 hover:text-black"
               }`}
             >
               {t.navAbout[currentLang]}
-              <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${mobileAboutOpen ? "rotate-180" : ""}`} />
+              <ChevronDown
+                className={`w-4 h-4 transition-transform duration-200 ${mobileAboutOpen ? "rotate-180" : ""}`}
+              />
             </button>
             {mobileAboutOpen && (
               <div className="ml-4 mt-1 space-y-1">
@@ -353,7 +377,7 @@ export default function Header({
                   {currentLang === "en" ? "Our Story" : "教會歷史"}
                 </button>
                 <button
-                  onClick={() => handleNav("about")}
+                  onClick={() => handleNav("leadership")}
                   className="block w-full text-left px-4 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-black/5 hover:text-black transition-all"
                 >
                   {currentLang === "en" ? "Leadership" : "牧師同工"}
@@ -372,7 +396,9 @@ export default function Header({
           <button
             onClick={() => handleNav("fellowships")}
             className={`block w-full text-left px-4 py-2.5 rounded-md text-base font-medium transition-all ${
-              currentPage === "fellowships" ? "bg-black/10 text-black" : "text-gray-600 hover:bg-black/5 hover:text-black"
+              currentPage === "fellowships"
+                ? "bg-black/10 text-black"
+                : "text-gray-600 hover:bg-black/5 hover:text-black"
             }`}
           >
             {t.navFellowships[currentLang]}
@@ -416,7 +442,9 @@ export default function Header({
             <button
               onClick={() => setMobileConnectOpen((o) => !o)}
               className={`flex w-full items-center justify-between px-4 py-2.5 rounded-md text-base font-medium transition-all ${
-                currentPage === "contact" || currentPage === "give" || currentPage === "prayer"
+                currentPage === "contact" ||
+                currentPage === "give" ||
+                currentPage === "prayer"
                   ? "bg-black/10 text-black"
                   : "text-gray-600 hover:bg-black/5 hover:text-black"
               }`}

@@ -7,7 +7,14 @@
  * Migration status: static fixtures kept as fallback.
  * Live fetch functions are exported from src/lib/cms.ts.
  */
-import { Sermon, Fellowship, SiteSettings, Activity, Leader, MinistryCategoryInfo } from "./types";
+import {
+  Sermon,
+  Fellowship,
+  SiteSettings,
+  Activity,
+  Leader,
+  MinistryCategoryInfo,
+} from "./types";
 
 export const siteSettings: SiteSettings = {
   churchName: {
@@ -98,7 +105,7 @@ export const ministryCategoriesData: MinistryCategoryInfo[] = [
       en: "A nurturing, age-appropriate environment where children learn to love God through Bible stories, worship songs, crafts, and meaningful friendships. We walk alongside parents in raising the next generation of faithful followers of Christ.",
       zh: "為嬰兒至五年級的孩子提供充滿愛、合乎年齡的成長環境。透過聖經故事、敬拜詩歌、手工藝及真誠友誼，讓孩子們在安全喜樂的氛圍中學習愛神愛人，與家長攜手培育下一代基督門徒。",
     },
-    bannerImageUrl: "/images/sundayservice.JPG",
+    bannerImageUrl: "/images/kidSundaySchool.png",
     color: "#4A90D9",
   },
   {
@@ -163,12 +170,12 @@ export const fellowshipsData: Fellowship[] = [
   {
     id: "children",
     name: {
-      en: "Children's Ministry",
-      zh: "兒童事工",
+      en: "Children Sunday School",
+      zh: "兒童主日學",
     },
     schedule: {
-      en: "Sundays at 9:30 AM (Sunday School) & 10:50 AM (Children's Church)",
-      zh: "主日上午 9:30 兒童主日學 及 10:50 兒童崇拜",
+      en: "Sundays at 10:50 AM (Sunday School)",
+      zh: "主日上午 10:50 兒童主日學",
     },
     location: {
       en: "Children's Classrooms (Lower Level)",
@@ -182,7 +189,7 @@ export const fellowshipsData: Fellowship[] = [
       en: "A nurturing, age-appropriate environment where children from infants through 5th grade learn to love God through Bible stories, worship songs, crafts, and meaningful friendships in a safe and joyful setting.",
       zh: "為嬰兒至五年級的孩子提供充滿愛、合乎年齡的成長環境。透過聖經故事、敬拜詩歌、手工藝及真誠友誼，讓孩子們在安全喜樂的氛圍中學習愛神愛人。",
     },
-    imageUrl: "/images/sundayservice.JPG",
+    imageUrl: "/images/kidSundaySchool.png",
     ministryCategory: "kids",
   },
   {
