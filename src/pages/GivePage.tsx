@@ -15,10 +15,10 @@ export default function GivePage({ currentLang }: GivePageProps) {
       en: "Your generous giving supports the ministry and mission of GCCC Gainesville.",
       zh: "您慷慨的奉獻支持甘城華人教會的事工與宣教使命。",
     },
-    giveOnline: { en: "Give Online", zh: "線上奉獻" },
+    giveOnline: { en: "Give via Zelle", zh: "Zelle 線上奉獻" },
     giveOnlineDesc: {
-      en: "We use Zelle for secure online giving. Send your gift directly to our church email.",
-      zh: "我們使用 Zelle 安全線上奉獻，請直接轉帳至教會電子郵件。",
+      en: "Use Zelle to transfer your offering. Send to general@gcccfl.org for tithing or Building Fund. Once tithing is satisfied, send to mission@gcccfl.org for Mission Fund.",
+      zh: "請使用 Zelle 轉帳奉獻。什一奉獻或建堂奉獻請轉至 general@gcccfl.org；若已完成什一奉獻且感動奉獻宣教，請轉至 mission@gcccfl.org。",
     },
     giveMail: { en: "Give by Mail", zh: "郵寄支票" },
     giveMailDesc: {
@@ -27,8 +27,8 @@ export default function GivePage({ currentLang }: GivePageProps) {
     },
     giveInPerson: { en: "Give In Person", zh: "現場奉獻" },
     giveInPersonDesc: {
-      en: "Offering boxes are available during Sunday Worship Service and at the welcome table.",
-      zh: "主日崇拜及迎賓桌旁設有奉獻箱，歡迎親臨奉獻。",
+      en: "Please deposit your offerings in the offering box, available during Sunday Worship Service.",
+      zh: "主日崇拜時，請將奉獻放入奉獻箱中。",
     },
     giveNote: {
       en: "GCCC is a registered 501(c)(3) nonprofit organization. All donations are tax-deductible to the extent allowed by law.",
@@ -71,13 +71,22 @@ export default function GivePage({ currentLang }: GivePageProps) {
                   {t.giveOnlineDesc[l]}
                 </p>
               </div>
-              <a
-                href={`mailto:${siteSettings.email}`}
-                className="mt-auto inline-flex items-center gap-1.5 text-[#9A2B27] text-xs font-semibold hover:text-[#80221E] transition-colors"
-              >
-                {siteSettings.email}
-                <ExternalLink className="w-3 h-3" />
-              </a>
+              <div className="mt-auto flex flex-col gap-1.5">
+                <a
+                  href="mailto:general@gcccfl.org"
+                  className="inline-flex items-center gap-1.5 text-[#9A2B27] text-xs font-semibold hover:text-[#80221E] transition-colors"
+                >
+                  general@gcccfl.org
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+                <a
+                  href="mailto:mission@gcccfl.org"
+                  className="inline-flex items-center gap-1.5 text-[#9A2B27] text-xs font-semibold hover:text-[#80221E] transition-colors"
+                >
+                  mission@gcccfl.org
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </div>
             </div>
 
             {/* Mail */}
@@ -112,7 +121,7 @@ export default function GivePage({ currentLang }: GivePageProps) {
                 </p>
               </div>
               <span className="mt-auto text-[#9A2B27] text-xs font-semibold">
-                {l === "en" ? "Sundays · 10:00 AM" : "週日 · 上午 10:00"}
+                {l === "en" ? "Sundays · 10:50 AM" : "週日 · 上午 10:50"}
               </span>
             </div>
           </div>

@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { FileText, ExternalLink, ChevronDown, ChevronUp } from "lucide-react";
 import { Language } from "../types";
 
 interface AboutPageProps {
@@ -5,6 +7,8 @@ interface AboutPageProps {
 }
 
 export default function AboutPage({ currentLang }: AboutPageProps) {
+  const [commemorativeOpen, setCommemorativeOpen] = useState(false);
+
   return (
     <>
       {/* HERO */}
@@ -184,7 +188,84 @@ export default function AboutPage({ currentLang }: AboutPageProps) {
                 </>
               )}
             </div>
+
           </div>
+        </div>
+
+        {/* Commemorative Issue Dropdown — centered below the grid */}
+        <div className="mt-12 max-w-5xl mx-auto rounded-2xl border border-black/8 overflow-hidden shadow-sm bg-white">
+          <button
+            className="w-full flex items-center justify-between px-6 py-5 text-left gap-4 hover:bg-black/2 transition-colors"
+            onClick={() => setCommemorativeOpen((o) => !o)}
+          >
+            <div className="flex items-center gap-4 min-w-0">
+              <div className="shrink-0 w-10 h-10 rounded-xl bg-[#9A2B27]/10 flex items-center justify-center">
+                <FileText className="w-5 h-5 text-[#9A2B27]" />
+              </div>
+              <div className="min-w-0">
+                <p className="font-serif font-semibold text-base sm:text-lg text-[#211E18]">
+                  {currentLang === "en"
+                    ? "20th Anniversary Commemorative Issue"
+                    : "建堂二十週年紀念特刊"}
+                </p>
+                <p className="text-sm text-gray-500 font-mono mt-0.5">2009</p>
+              </div>
+            </div>
+            <div className="shrink-0 text-gray-400">
+              {commemorativeOpen ? (
+                <ChevronUp className="w-5 h-5" />
+              ) : (
+                <ChevronDown className="w-5 h-5" />
+              )}
+            </div>
+          </button>
+
+          {commemorativeOpen && (
+            <div className="border-t border-black/8 px-6 py-5 space-y-4">
+              <p className="text-sm text-gray-600 leading-relaxed">
+                {currentLang === "en"
+                  ? "A commemorative issue documenting witnesses of God's grace and glory in our church history, published for the 20th anniversary of GCCC."
+                  : "教會成立二十週年紀念特刊，記錄神在本教會歷史中的恩典與榮耀見證。"}
+              </p>
+              <div
+                className="rounded-xl overflow-hidden border border-black/10 bg-gray-50"
+                style={{ height: "900px" }}
+              >
+                <object
+                  data="/pdfs/20th_anniversary.pdf"
+                  type="application/pdf"
+                  className="w-full h-full"
+                >
+                  <div className="flex flex-col items-center justify-center h-full gap-3 text-gray-500 text-sm p-8 text-center">
+                    <FileText className="w-10 h-10 text-gray-300" />
+                    <p>
+                      {currentLang === "en"
+                        ? "Your browser cannot display this PDF inline."
+                        : "您的瀏覽器無法直接顯示此 PDF。"}
+                    </p>
+                    <a
+                      href="/pdfs/20th_anniversary.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-[#9A2B27] hover:text-[#7a2220] transition-colors"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      {currentLang === "en" ? "Download PDF" : "下載 PDF"}
+                    </a>
+                  </div>
+                </object>
+              </div>
+              <a
+                href="/pdfs/20th_anniversary.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-[#9A2B27] hover:text-[#7a2220] transition-colors"
+              >
+                <ExternalLink className="w-4 h-4" />
+                {currentLang === "en" ? "Open PDF" : "開啟 PDF"}
+              </a>
+            </div>
+          )}
         </div>
       </section>
     </>

@@ -220,16 +220,16 @@ export default function Header({
               {eventsDropdownOpen && (
                 <div className="absolute right-0 top-full mt-1 w-48 bg-white rounded-xl shadow-lg border border-black/8 overflow-hidden py-1 animate-fade-in">
                   <button
-                    onClick={() => handleNav("calendar")}
-                    className="w-full text-left px-4 py-2.5 text-sm font-sans text-gray-700 hover:bg-black/5 hover:text-black transition-colors"
-                  >
-                    {t.navEventsCalendar[currentLang]}
-                  </button>
-                  <button
                     onClick={() => handleNav("announcements")}
                     className="w-full text-left px-4 py-2.5 text-sm font-sans text-gray-700 hover:bg-black/5 hover:text-black transition-colors"
                   >
                     {t.navEventsAnnouncements[currentLang]}
+                  </button>
+                  <button
+                    onClick={() => handleNav("calendar")}
+                    className="w-full text-left px-4 py-2.5 text-sm font-sans text-gray-700 hover:bg-black/5 hover:text-black transition-colors"
+                  >
+                    {t.navEventsCalendar[currentLang]}
                   </button>
                 </div>
               )}
@@ -422,16 +422,16 @@ export default function Header({
             {mobileEventsOpen && (
               <div className="ml-4 mt-1 space-y-1">
                 <button
-                  onClick={() => handleNav("calendar")}
-                  className="block w-full text-left px-4 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-black/5 hover:text-black transition-all"
-                >
-                  {t.navEventsCalendar[currentLang]}
-                </button>
-                <button
                   onClick={() => handleNav("announcements")}
                   className="block w-full text-left px-4 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-black/5 hover:text-black transition-all"
                 >
                   {t.navEventsAnnouncements[currentLang]}
+                </button>
+                <button
+                  onClick={() => handleNav("calendar")}
+                  className="block w-full text-left px-4 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-black/5 hover:text-black transition-all"
+                >
+                  {t.navEventsCalendar[currentLang]}
                 </button>
               </div>
             )}

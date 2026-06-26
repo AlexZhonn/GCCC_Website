@@ -100,7 +100,7 @@ export default function HomePage({ currentLang, onNavigateTo }: HomePageProps) {
       {/* SUNDAY SERVICE */}
       <section
         id="sunday-service"
-        className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 max-w-screen-2xl mx-auto"
+        className="py-10 md:py-14 px-4 sm:px-6 lg:px-8 max-w-screen-2xl mx-auto"
       >
         <div className="flex flex-col lg:flex-row rounded-3xl overflow-hidden shadow-2xl lg:h-140">
           {/* Image panel */}
@@ -200,7 +200,7 @@ export default function HomePage({ currentLang, onNavigateTo }: HomePageProps) {
       </section>
 
       {/* PRAYER REQUESTS */}
-      <section className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 max-w-screen-2xl mx-auto">
+      <section className="py-10 md:py-14 px-4 sm:px-6 lg:px-8 max-w-screen-2xl mx-auto">
         <div className="flex flex-col lg:flex-row-reverse rounded-3xl overflow-hidden shadow-2xl lg:h-140">
           {/* Image panel */}
           <div className="lg:w-1/2 shrink-0 h-64 lg:h-full">
@@ -235,7 +235,7 @@ export default function HomePage({ currentLang, onNavigateTo }: HomePageProps) {
                 <button
                   onClick={() => {
                     sessionStorage.setItem("gccc_scroll_prayer", "1");
-                    onNavigateTo("announcements");
+                    onNavigateTo("prayer");
                   }}
                   className="inline-flex items-center gap-2 bg-[#9A2B27] hover:bg-[#7e2320] text-white px-5 py-2.5 rounded-lg text-base font-semibold transition-all shadow-lg shadow-black/20 border-amber-50 border"
                 >
@@ -253,7 +253,7 @@ export default function HomePage({ currentLang, onNavigateTo }: HomePageProps) {
       {/* SERMONS — inline on home page for easy visitor access */}
       <section
         id="sermons"
-        className="py-20 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center"
+        className="py-10 md:py-14 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center"
       >
         <div className="mb-8">
           <h2 className="font-serif text-3xl md:text-6xl text-[#33271E] font-bold tracking-tight">
@@ -266,7 +266,7 @@ export default function HomePage({ currentLang, onNavigateTo }: HomePageProps) {
       {/* ACTIVITIES */}
       <section
         id="activities"
-        className="text-center py-20 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto"
+        className="text-center py-10 md:py-14 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto"
       >
         <div className="mb-10">
           <h2 className="font-serif text-3xl md:text-6xl text-brand-brown-dark font-bold tracking-tight">

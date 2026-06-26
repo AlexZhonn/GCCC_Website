@@ -72,7 +72,8 @@ function getCategoryFromPath(): MinistryCategory | null {
 export default function App() {
   const [currentLang, setCurrentLang] = useState<Language>("zh");
   const [currentPage, setCurrentPage] = useState<Page>(getPageFromPath);
-  const [selectedMinistryCategory, setSelectedMinistryCategory] = useState<MinistryCategory | null>(getCategoryFromPath);
+  const [selectedMinistryCategory, setSelectedMinistryCategory] =
+    useState<MinistryCategory | null>(getCategoryFromPath);
   const [introPlaying, setIntroPlaying] = useState(true);
   const [forceReplayKey, setForceReplayKey] = useState(0);
   const [showNewHereModal, setShowNewHereModal] = useState(false);
@@ -247,9 +248,16 @@ export default function App() {
             >
               <MapPin className="w-5 h-5 shrink-0 mt-0.5" />
               <span>
-                {siteSettings.address[currentLang].replace(/, (Gainesville.*)$/, "")}
+                {siteSettings.address[currentLang].replace(
+                  /, (Gainesville.*)$/,
+                  "",
+                )}
                 <br />
-                {siteSettings.address[currentLang].match(/, (Gainesville.*)$/)?.[1]}
+                {
+                  siteSettings.address[currentLang].match(
+                    /, (Gainesville.*)$/,
+                  )?.[1]
+                }
               </span>
             </a>
           </div>
@@ -269,6 +277,10 @@ export default function App() {
                 {
                   label: { en: "Ministry", zh: "团契事工" },
                   page: "fellowships" as Page,
+                },
+                {
+                  label: { en: "Events", zh: "活動" },
+                  page: "announcements" as Page,
                 },
               ] as const
             ).map(({ label, page }) => (
@@ -299,14 +311,12 @@ export default function App() {
             >
               {currentLang === "en" ? "Prayer" : "代禱事項"}
             </button>
-            <a
-              href="https://www.gcccfl.org/give"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-lg text-white/60 hover:text-white transition-colors font-light"
+            <button
+              onClick={() => handlePageChange("give")}
+              className="text-lg text-white/60 hover:text-white transition-colors text-left font-light"
             >
               {currentLang === "en" ? "Give" : "線上奉獻"}
-            </a>
+            </button>
           </div>
         </div>
 
@@ -335,7 +345,7 @@ export default function App() {
 
           {/* Instagram right */}
           <a
-            href="https://www.instagram.com/gcccgainesville/"
+            href="https://www.instagram.com/gccc_alpha/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-white/50 hover:text-white transition-colors"

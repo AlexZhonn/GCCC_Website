@@ -29,19 +29,6 @@ const dewIssues: DewIssue[] = [
       zh: "2026 年 3 月甘露",
     },
   },
-  {
-    id: "2009",
-    title: {
-      en: "20th Anniversary",
-      zh: "建堂二十週年紀念",
-    },
-    date: "2009",
-    pdfUrl: "/pdfs/20th_anniversary.pdf",
-    description: {
-      en: "20th Anniversary commemorative issue",
-      zh: "建堂二十週年紀念特刊",
-    },
-  },
 ];
 
 function formatDate(dateStr: string, lang: Language) {
@@ -153,7 +140,11 @@ export default function GainsvilleDewPage({
                         >
                           <div className="flex flex-col items-center justify-center h-full gap-3 text-gray-500 text-sm p-8 text-center">
                             <FileText className="w-10 h-10 text-gray-300" />
-                            <p>{currentLang === "en" ? "Your browser cannot display this PDF inline." : "您的瀏覽器無法直接顯示此 PDF。"}</p>
+                            <p>
+                              {currentLang === "en"
+                                ? "Your browser cannot display this PDF inline."
+                                : "您的瀏覽器無法直接顯示此 PDF。"}
+                            </p>
                             <a
                               href={issue.pdfUrl}
                               target="_blank"
@@ -161,7 +152,9 @@ export default function GainsvilleDewPage({
                               className="inline-flex items-center gap-2 text-sm font-semibold text-[#9A2B27] hover:text-[#7a2220] transition-colors"
                             >
                               <ExternalLink className="w-4 h-4" />
-                              {currentLang === "en" ? "Download PDF" : "下載 PDF"}
+                              {currentLang === "en"
+                                ? "Download PDF"
+                                : "下載 PDF"}
                             </a>
                           </div>
                         </object>
