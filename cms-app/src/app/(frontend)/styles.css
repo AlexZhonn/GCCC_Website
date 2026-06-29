@@ -1,0 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+SC:wght@500;700&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-serif-en: "Spectral", Georgia, serif;
+  --font-serif-zh: "Noto Serif SC", serif;
+  --font-sans: "Inter", "Helvetica Neue", system-ui, sans-serif;
+
+  --color-brand-cream: #fbf7ef;
+  --color-brand-brown-dark: #33271e;
+  --color-brand-brown-deep: #211e18;
+  --color-brand-red: #9a2b27;
+  --color-brand-tan: #e7b7a0;
+}
+
+body {
+  background-color: #eeecec;
+  color: #33271e;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Animations helpers */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}

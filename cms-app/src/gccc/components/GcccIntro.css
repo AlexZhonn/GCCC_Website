@@ -1,0 +1,131 @@
+.gccc-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: #eeecec;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* fade out the overlay: starts at 3.0s, lasts 0.6s → done at 3.6s */
+  animation: gccc-intro-fade-out 0.6s 3.0s cubic-bezier(0.4, 0, 0.2, 1)
+    forwards;
+}
+
+.gccc-intro__lockup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  /* fly to header logo position: starts at 2.6s, lasts 0.7s */
+  animation: gccc-intro-dock 0.7s 2.6s cubic-bezier(0.4, 0, 0.2, 1)
+    forwards;
+}
+
+.gccc-intro__mark .s {
+  fill: none;
+  stroke: #211e18;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.gccc-intro__mark .s--book {
+  stroke-width: 1.4;
+}
+
+.gccc-intro__mark .s--inner {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: gccc-intro-draw 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.gccc-intro__mark .s--gring {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: gccc-intro-draw 0.55s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
+}
+
+.gccc-intro__mark .s--garm {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: gccc-intro-draw 0.25s cubic-bezier(0.4, 0, 0.2, 1) 1.05s forwards;
+}
+
+.gccc-intro__name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.gccc-intro__zh {
+  font-family: "Noto Serif SC", "Songti SC", serif;
+  font-size: 36px;
+  letter-spacing: 9px;
+  color: #211e18;
+  opacity: 0;
+  animation: gccc-intro-fade-in 0.5s 1.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.gccc-intro__en {
+  font-family: "Spectral", Georgia, serif;
+  font-size: 16px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #6f685b;
+  opacity: 0;
+  animation: gccc-intro-fade-in 0.5s 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes gccc-intro-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes gccc-intro-fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes gccc-intro-fade-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/*
+  Fly the lockup from center-screen to the header logo slot.
+  Header logo: GcccMark at 44×46px, roughly 56px from left edge, 36px from top.
+  The lockup is centered; SVG is 400×436px (rendered).
+  We translate it toward the top-left corner and shrink it to match header size.
+  The negative-translate pushes it up and left (toward the header logo).
+  scale(0.11) ≈ 44px / 400px rendered SVG width.
+*/
+@keyframes gccc-intro-dock {
+  to {
+    transform: translate(calc(-50vw + 72px), calc(-50vh + 36px)) scale(0.11);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gccc-intro {
+    animation: gccc-intro-fade-out 0.4s 0.6s forwards;
+  }
+  .gccc-intro__lockup {
+    animation: none;
+  }
+  .gccc-intro__mark .s {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+  .gccc-intro__zh,
+  .gccc-intro__en {
+    opacity: 1;
+    animation: none;
+  }
+}
