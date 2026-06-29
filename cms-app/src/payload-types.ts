@@ -76,6 +76,7 @@ export interface Config {
     fellowships: Fellowship;
     activities: Activity;
     'ministry-categories': MinistryCategory;
+    pages: Page;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -92,6 +93,7 @@ export interface Config {
     fellowships: FellowshipsSelect<false> | FellowshipsSelect<true>;
     activities: ActivitiesSelect<false> | ActivitiesSelect<true>;
     'ministry-categories': MinistryCategoriesSelect<false> | MinistryCategoriesSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -103,9 +105,25 @@ export interface Config {
   fallbackLocale: ('false' | 'none' | 'null') | false | null | ('en' | 'zh') | ('en' | 'zh')[];
   globals: {
     'site-settings': SiteSetting;
+    'page-home': PageHome;
+    'page-about': PageAbout;
+    'page-announcements': PageAnnouncement;
+    'page-give': PageGive;
+    'page-gainesville-dew': PageGainesvilleDew;
+    'page-fellowships': PageFellowship;
+    'page-leadership': PageLeadership;
+    'page-contact': PageContact;
   };
   globalsSelect: {
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+    'page-home': PageHomeSelect<false> | PageHomeSelect<true>;
+    'page-about': PageAboutSelect<false> | PageAboutSelect<true>;
+    'page-announcements': PageAnnouncementsSelect<false> | PageAnnouncementsSelect<true>;
+    'page-give': PageGiveSelect<false> | PageGiveSelect<true>;
+    'page-gainesville-dew': PageGainesvilleDewSelect<false> | PageGainesvilleDewSelect<true>;
+    'page-fellowships': PageFellowshipsSelect<false> | PageFellowshipsSelect<true>;
+    'page-leadership': PageLeadershipSelect<false> | PageLeadershipSelect<true>;
+    'page-contact': PageContactSelect<false> | PageContactSelect<true>;
   };
   locale: 'en' | 'zh';
   widgets: {
@@ -171,6 +189,7 @@ export interface Media {
    */
   alt?: string | null;
   caption?: string | null;
+  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -495,6 +514,392 @@ export interface MinistryCategory {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: number;
+  /**
+   * URL key for this page. Use: home | about | fellowships | sermons | calendar | contact | give | announcements | prayer | gainesville-dew | leadership
+   */
+  slug: string;
+  title?: string | null;
+  blocks?:
+    | (
+        | {
+            backgroundImage?: (number | null) | Media;
+            eyebrow?: string | null;
+            heading: string;
+            subheading?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hero';
+          }
+        | {
+            image?: (number | null) | Media;
+            eyebrow?: string | null;
+            heading: string;
+            body?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            scheduleItems?:
+              | {
+                  time: string;
+                  label: string;
+                  sub?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            watchLiveUrl?: string | null;
+            watchLiveLabel?: string | null;
+            findUsLabel?: string | null;
+            addressLine?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'sundayService';
+          }
+        | {
+            image?: (number | null) | Media;
+            eyebrow?: string | null;
+            heading: string;
+            body?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            ctaLabel?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'prayerFeature';
+          }
+        | {
+            sectionTitle: string;
+            sectionDesc?: string | null;
+            directionsTitle?: string | null;
+            directionItems?:
+              | {
+                  icon?: string | null;
+                  label: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'campusFocus';
+          }
+        | {
+            heading: string;
+            items?:
+              | {
+                  fellowship?: string | null;
+                  title: string;
+                  dateLabel?: string | null;
+                  description?: {
+                    root: {
+                      type: string;
+                      children: {
+                        type: any;
+                        version: number;
+                        [k: string]: unknown;
+                      }[];
+                      direction: ('ltr' | 'rtl') | null;
+                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                      indent: number;
+                      version: number;
+                    };
+                    [k: string]: unknown;
+                  } | null;
+                  photos?:
+                    | {
+                        photo: number | Media;
+                        id?: string | null;
+                      }[]
+                    | null;
+                  /**
+                   * Only used while migrating images to the media library.
+                   */
+                  legacyPhotoPaths?:
+                    | {
+                        path?: string | null;
+                        id?: string | null;
+                      }[]
+                    | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'activities';
+          }
+        | {
+            churchPortrait?: (number | null) | Media;
+            proclamationOfFaith?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            historyHeading?: string | null;
+            historyBody?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            documents?:
+              | {
+                  label: string;
+                  year?: string | null;
+                  description?: string | null;
+                  file?: (number | null) | Media;
+                  legacyPdfPath?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'churchHistory';
+          }
+        | {
+            heading?: string | null;
+            body?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'richText';
+          }
+        | {
+            heading?: string | null;
+            subheading?: string | null;
+            items?:
+              | {
+                  date: string;
+                  title: string;
+                  body?: {
+                    root: {
+                      type: string;
+                      children: {
+                        type: any;
+                        version: number;
+                        [k: string]: unknown;
+                      }[];
+                      direction: ('ltr' | 'rtl') | null;
+                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                      indent: number;
+                      version: number;
+                    };
+                    [k: string]: unknown;
+                  } | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'announcementsList';
+          }
+        | {
+            eyebrow?: string | null;
+            heading?: string | null;
+            subheading?: string | null;
+            issues?:
+              | {
+                  title: string;
+                  date: string;
+                  description?: string | null;
+                  file?: (number | null) | Media;
+                  legacyPdfPath?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'newsletter';
+          }
+        | {
+            heading?: string | null;
+            subheading?: string | null;
+            methods?:
+              | {
+                  icon?: string | null;
+                  title: string;
+                  description?: {
+                    root: {
+                      type: string;
+                      children: {
+                        type: any;
+                        version: number;
+                        [k: string]: unknown;
+                      }[];
+                      direction: ('ltr' | 'rtl') | null;
+                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                      indent: number;
+                      version: number;
+                    };
+                    [k: string]: unknown;
+                  } | null;
+                  detail?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            taxNote?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            scripture?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'give';
+          }
+        | {
+            modalTitle: string;
+            modalSubtitle?: string | null;
+            introText?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            faqs?:
+              | {
+                  question: string;
+                  answer?: {
+                    root: {
+                      type: string;
+                      children: {
+                        type: any;
+                        version: number;
+                        [k: string]: unknown;
+                      }[];
+                      direction: ('ltr' | 'rtl') | null;
+                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                      indent: number;
+                      version: number;
+                    };
+                    [k: string]: unknown;
+                  } | null;
+                  id?: string | null;
+                }[]
+              | null;
+            closingNote?: string | null;
+            closeButtonLabel?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'visitorFaq';
+          }
+        | {
+            worshipTimesLine?: string | null;
+            instagramUrl?: string | null;
+            whoWeAreLinks?:
+              | {
+                  label: string;
+                  page?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            getConnectedLinks?:
+              | {
+                  label: string;
+                  page?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'footer';
+          }
+      )[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -552,6 +957,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'ministry-categories';
         value: number | MinistryCategory;
+      } | null)
+    | ({
+        relationTo: 'pages';
+        value: number | Page;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -624,6 +1033,7 @@ export interface UsersSelect<T extends boolean = true> {
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
   caption?: T;
+  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -785,6 +1195,229 @@ export interface MinistryCategoriesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  slug?: T;
+  title?: T;
+  blocks?:
+    | T
+    | {
+        hero?:
+          | T
+          | {
+              backgroundImage?: T;
+              eyebrow?: T;
+              heading?: T;
+              subheading?: T;
+              id?: T;
+              blockName?: T;
+            };
+        sundayService?:
+          | T
+          | {
+              image?: T;
+              eyebrow?: T;
+              heading?: T;
+              body?: T;
+              scheduleItems?:
+                | T
+                | {
+                    time?: T;
+                    label?: T;
+                    sub?: T;
+                    id?: T;
+                  };
+              watchLiveUrl?: T;
+              watchLiveLabel?: T;
+              findUsLabel?: T;
+              addressLine?: T;
+              id?: T;
+              blockName?: T;
+            };
+        prayerFeature?:
+          | T
+          | {
+              image?: T;
+              eyebrow?: T;
+              heading?: T;
+              body?: T;
+              ctaLabel?: T;
+              id?: T;
+              blockName?: T;
+            };
+        campusFocus?:
+          | T
+          | {
+              sectionTitle?: T;
+              sectionDesc?: T;
+              directionsTitle?: T;
+              directionItems?:
+                | T
+                | {
+                    icon?: T;
+                    label?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        activities?:
+          | T
+          | {
+              heading?: T;
+              items?:
+                | T
+                | {
+                    fellowship?: T;
+                    title?: T;
+                    dateLabel?: T;
+                    description?: T;
+                    photos?:
+                      | T
+                      | {
+                          photo?: T;
+                          id?: T;
+                        };
+                    legacyPhotoPaths?:
+                      | T
+                      | {
+                          path?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        churchHistory?:
+          | T
+          | {
+              churchPortrait?: T;
+              proclamationOfFaith?: T;
+              historyHeading?: T;
+              historyBody?: T;
+              documents?:
+                | T
+                | {
+                    label?: T;
+                    year?: T;
+                    description?: T;
+                    file?: T;
+                    legacyPdfPath?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        richText?:
+          | T
+          | {
+              heading?: T;
+              body?: T;
+              id?: T;
+              blockName?: T;
+            };
+        announcementsList?:
+          | T
+          | {
+              heading?: T;
+              subheading?: T;
+              items?:
+                | T
+                | {
+                    date?: T;
+                    title?: T;
+                    body?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        newsletter?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              subheading?: T;
+              issues?:
+                | T
+                | {
+                    title?: T;
+                    date?: T;
+                    description?: T;
+                    file?: T;
+                    legacyPdfPath?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        give?:
+          | T
+          | {
+              heading?: T;
+              subheading?: T;
+              methods?:
+                | T
+                | {
+                    icon?: T;
+                    title?: T;
+                    description?: T;
+                    detail?: T;
+                    id?: T;
+                  };
+              taxNote?: T;
+              scripture?: T;
+              id?: T;
+              blockName?: T;
+            };
+        visitorFaq?:
+          | T
+          | {
+              modalTitle?: T;
+              modalSubtitle?: T;
+              introText?: T;
+              faqs?:
+                | T
+                | {
+                    question?: T;
+                    answer?: T;
+                    id?: T;
+                  };
+              closingNote?: T;
+              closeButtonLabel?: T;
+              id?: T;
+              blockName?: T;
+            };
+        footer?:
+          | T
+          | {
+              worshipTimesLine?: T;
+              instagramUrl?: T;
+              whoWeAreLinks?:
+                | T
+                | {
+                    label?: T;
+                    page?: T;
+                    id?: T;
+                  };
+              getConnectedLinks?:
+                | T
+                | {
+                    label?: T;
+                    page?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -902,6 +1535,356 @@ export interface SiteSetting {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-home".
+ */
+export interface PageHome {
+  id: number;
+  hero: {
+    backgroundImage?: (number | null) | Media;
+    eyebrow?: string | null;
+    heading: string;
+    subheading?: string | null;
+  };
+  sundayService: {
+    image?: (number | null) | Media;
+    eyebrow?: string | null;
+    heading: string;
+    body?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    scheduleItems?:
+      | {
+          time: string;
+          label: string;
+          sub?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    watchLiveUrl?: string | null;
+    watchLiveLabel?: string | null;
+    findUsLabel?: string | null;
+    addressLine?: string | null;
+  };
+  prayerFeature: {
+    image?: (number | null) | Media;
+    eyebrow?: string | null;
+    heading: string;
+    body?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    ctaLabel?: string | null;
+  };
+  campusFocus: {
+    sectionTitle: string;
+    sectionDesc?: string | null;
+    directionsTitle?: string | null;
+    directionItems?:
+      | {
+          icon?: string | null;
+          label: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  activities: {
+    heading: string;
+    items?:
+      | {
+          fellowship?: string | null;
+          title: string;
+          dateLabel?: string | null;
+          description?: {
+            root: {
+              type: string;
+              children: {
+                type: any;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          photos?:
+            | {
+                photo: number | Media;
+                id?: string | null;
+              }[]
+            | null;
+          /**
+           * Only used while migrating images to the media library.
+           */
+          legacyPhotoPaths?:
+            | {
+                path?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-about".
+ */
+export interface PageAbout {
+  id: number;
+  hero: {
+    backgroundImage?: (number | null) | Media;
+    eyebrow?: string | null;
+    heading: string;
+  };
+  churchHistory?: {
+    churchPortrait?: (number | null) | Media;
+    proclamationOfFaith?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    historyHeading?: string | null;
+    historyBody?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    documents?:
+      | {
+          label: string;
+          year?: string | null;
+          description?: string | null;
+          file?: (number | null) | Media;
+          legacyPdfPath?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-announcements".
+ */
+export interface PageAnnouncement {
+  id: number;
+  heading?: string | null;
+  subheading?: string | null;
+  items?:
+    | {
+        date: string;
+        title: string;
+        body?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-give".
+ */
+export interface PageGive {
+  id: number;
+  heading?: string | null;
+  subheading?: string | null;
+  methods?:
+    | {
+        icon?: string | null;
+        title: string;
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        detail?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  taxNote?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  scripture?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-gainesville-dew".
+ */
+export interface PageGainesvilleDew {
+  id: number;
+  eyebrow?: string | null;
+  heading?: string | null;
+  subheading?: string | null;
+  issues?:
+    | {
+        title: string;
+        date: string;
+        description?: string | null;
+        file?: (number | null) | Media;
+        legacyPdfPath?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-fellowships".
+ */
+export interface PageFellowship {
+  id: number;
+  hero: {
+    backgroundImage?: (number | null) | Media;
+    heading: string;
+    subtitle?: string | null;
+    learnMoreLabel?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-leadership".
+ */
+export interface PageLeadership {
+  id: number;
+  hero: {
+    backgroundImage?: (number | null) | Media;
+    eyebrow?: string | null;
+    heading: string;
+  };
+  introParagraph?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-contact".
+ */
+export interface PageContact {
+  id: number;
+  hero: {
+    backgroundImage?: (number | null) | Media;
+    heading: string;
+    subheading?: string | null;
+  };
+  /**
+   * Override default EN/ZH labels on the visitor connect form.
+   */
+  form?: {
+    sectionHeading?: string | null;
+    submitLabel?: string | null;
+    successMessage?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-settings_select".
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
@@ -923,6 +1906,246 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   youtubeLiveUrl?: T;
   googleCalendarId?: T;
   googleMapsEmbedUrl?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-home_select".
+ */
+export interface PageHomeSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        backgroundImage?: T;
+        eyebrow?: T;
+        heading?: T;
+        subheading?: T;
+      };
+  sundayService?:
+    | T
+    | {
+        image?: T;
+        eyebrow?: T;
+        heading?: T;
+        body?: T;
+        scheduleItems?:
+          | T
+          | {
+              time?: T;
+              label?: T;
+              sub?: T;
+              id?: T;
+            };
+        watchLiveUrl?: T;
+        watchLiveLabel?: T;
+        findUsLabel?: T;
+        addressLine?: T;
+      };
+  prayerFeature?:
+    | T
+    | {
+        image?: T;
+        eyebrow?: T;
+        heading?: T;
+        body?: T;
+        ctaLabel?: T;
+      };
+  campusFocus?:
+    | T
+    | {
+        sectionTitle?: T;
+        sectionDesc?: T;
+        directionsTitle?: T;
+        directionItems?:
+          | T
+          | {
+              icon?: T;
+              label?: T;
+              id?: T;
+            };
+      };
+  activities?:
+    | T
+    | {
+        heading?: T;
+        items?:
+          | T
+          | {
+              fellowship?: T;
+              title?: T;
+              dateLabel?: T;
+              description?: T;
+              photos?:
+                | T
+                | {
+                    photo?: T;
+                    id?: T;
+                  };
+              legacyPhotoPaths?:
+                | T
+                | {
+                    path?: T;
+                    id?: T;
+                  };
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-about_select".
+ */
+export interface PageAboutSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        backgroundImage?: T;
+        eyebrow?: T;
+        heading?: T;
+      };
+  churchHistory?:
+    | T
+    | {
+        churchPortrait?: T;
+        proclamationOfFaith?: T;
+        historyHeading?: T;
+        historyBody?: T;
+        documents?:
+          | T
+          | {
+              label?: T;
+              year?: T;
+              description?: T;
+              file?: T;
+              legacyPdfPath?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-announcements_select".
+ */
+export interface PageAnnouncementsSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  items?:
+    | T
+    | {
+        date?: T;
+        title?: T;
+        body?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-give_select".
+ */
+export interface PageGiveSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  methods?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        description?: T;
+        detail?: T;
+        id?: T;
+      };
+  taxNote?: T;
+  scripture?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-gainesville-dew_select".
+ */
+export interface PageGainesvilleDewSelect<T extends boolean = true> {
+  eyebrow?: T;
+  heading?: T;
+  subheading?: T;
+  issues?:
+    | T
+    | {
+        title?: T;
+        date?: T;
+        description?: T;
+        file?: T;
+        legacyPdfPath?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-fellowships_select".
+ */
+export interface PageFellowshipsSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        backgroundImage?: T;
+        heading?: T;
+        subtitle?: T;
+        learnMoreLabel?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-leadership_select".
+ */
+export interface PageLeadershipSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        backgroundImage?: T;
+        eyebrow?: T;
+        heading?: T;
+      };
+  introParagraph?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-contact_select".
+ */
+export interface PageContactSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        backgroundImage?: T;
+        heading?: T;
+        subheading?: T;
+      };
+  form?:
+    | T
+    | {
+        sectionHeading?: T;
+        submitLabel?: T;
+        successMessage?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

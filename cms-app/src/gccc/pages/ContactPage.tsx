@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Language } from "../types";
-import { siteSettings } from "../data";
+import { fetchSiteSettings, fetchPageGlobal, type CmsSiteSettings, type ContactPageGlobalDoc } from "../lib/cms";
 import { Heart, ChevronDown } from "lucide-react";
 
 interface ContactPageProps {
@@ -57,7 +57,17 @@ const HEAR_OPTIONS: { value: string; en: string; zh: string }[] = [
   { value: "social_media", en: "Social Media", zh: "社交媒體" },
 ];
 
+const NA = "—";
+
 export default function ContactPage({ currentLang }: ContactPageProps) {
+  const [settings, setSettings] = useState<CmsSiteSettings | null>(null);
+  const [pageDoc, setPageDoc] = useState<ContactPageGlobalDoc | null>(null);
+
+  useEffect(() => {
+    fetchSiteSettings(currentLang).then(setSettings);
+    fetchPageGlobal<ContactPageGlobalDoc>("page-contact", currentLang).then(setPageDoc);
+  }, [currentLang]);
+
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -190,7 +200,7 @@ export default function ContactPage({ currentLang }: ContactPageProps) {
                 rel="noopener noreferrer"
                 className="font-serif text-lg text-[#33271E] hover:text-[#9A2B27] hover:underline"
               >
-                {siteSettings.address[l]}
+                {settings?.address ?? NA}
               </a>
             </div>
             <div>
@@ -198,10 +208,10 @@ export default function ContactPage({ currentLang }: ContactPageProps) {
                 {l === "en" ? "Phone" : "電話號碼"}
               </span>
               <a
-                href={`tel:${siteSettings.phone.replace(/\D/g, "")}`}
+                href={`tel:${(settings?.phone ?? "").replace(/\D/g, "")}`}
                 className="font-serif text-lg text-[#33271E] hover:text-[#9A2B27] hover:underline"
               >
-                {siteSettings.phone}
+                {settings?.phone ?? NA}
               </a>
             </div>
             <div>
@@ -209,10 +219,10 @@ export default function ContactPage({ currentLang }: ContactPageProps) {
                 {l === "en" ? "Email" : "電子郵件"}
               </span>
               <a
-                href={`mailto:${siteSettings.email}`}
+                href={`mailto:${settings?.email ?? ""}`}
                 className="font-serif text-lg text-[#33271E] hover:text-[#9A2B27] hover:underline"
               >
-                {siteSettings.email}
+                {settings?.email ?? NA}
               </a>
             </div>
           </div>
@@ -223,20 +233,20 @@ export default function ContactPage({ currentLang }: ContactPageProps) {
               {l === "en" ? "Pastor" : "牧師"}
             </span>
             <p className="font-serif text-lg text-[#33271E]">
-              {siteSettings.pastor.name}
+              {settings?.pastor?.name ?? NA}
             </p>
             <a
-              href={`mailto:${siteSettings.pastor.email}`}
+              href={`mailto:${settings?.pastor?.email ?? ""}`}
               className="font-serif text-lg text-[#33271E] hover:text-[#9A2B27] hover:underline block"
             >
-              {siteSettings.pastor.email}
+              {settings?.pastor?.email ?? NA}
             </a>
             <a
-              href={`tel:${siteSettings.pastor.cell.replace(/\D/g, "")}`}
+              href={`tel:${(settings?.pastor?.cell ?? "").replace(/\D/g, "")}`}
               className="font-serif text-lg text-[#33271E] hover:text-[#9A2B27] hover:underline block"
             >
               {l === "en" ? "Cell: " : "手機："}
-              {siteSettings.pastor.cell}
+              {settings?.pastor?.cell ?? NA}
             </a>
           </div>
         </div>

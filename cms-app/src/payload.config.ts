@@ -1,4 +1,5 @@
-import { sqliteAdapter } from '@payloadcms/db-sqlite'
+import { postgresAdapter } from '@payloadcms/db-postgres'
+import { s3Storage } from '@payloadcms/storage-s3'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
@@ -14,7 +15,16 @@ import { Sermons } from './collections/Sermons'
 import { Fellowships } from './collections/Fellowships'
 import { Activities } from './collections/Activities'
 import { MinistryCategories } from './collections/MinistryCategories'
+import { Pages } from './collections/Pages'
 import { SiteSettings } from './globals/SiteSettings'
+import { HomePageGlobal } from './globals/pages/HomePage'
+import { AboutPageGlobal } from './globals/pages/AboutPage'
+import { AnnouncementsPageGlobal } from './globals/pages/AnnouncementsPage'
+import { GivePageGlobal } from './globals/pages/GivePage'
+import { GainsvilleDewPageGlobal } from './globals/pages/GainsvilleDewPage'
+import { FellowshipsPageGlobal } from './globals/pages/FellowshipsPage'
+import { LeadershipPageGlobal } from './globals/pages/LeadershipPage'
+import { ContactPageGlobal } from './globals/pages/ContactPage'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -50,9 +60,20 @@ export default buildConfig({
     Fellowships,
     Activities,
     MinistryCategories,
+    Pages,
   ],
 
-  globals: [SiteSettings],
+  globals: [
+    SiteSettings,
+    HomePageGlobal,
+    AboutPageGlobal,
+    AnnouncementsPageGlobal,
+    GivePageGlobal,
+    GainsvilleDewPageGlobal,
+    FellowshipsPageGlobal,
+    LeadershipPageGlobal,
+    ContactPageGlobal,
+  ],
 
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
@@ -61,9 +82,9 @@ export default buildConfig({
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
 
-  db: sqliteAdapter({
-    client: {
-      url: process.env.DATABASE_URL || 'file:../cms-app.db',
+  db: postgresAdapter({
+    pool: {
+      connectionString: process.env.DATABASE_URL,
     },
   }),
 
@@ -74,5 +95,22 @@ export default buildConfig({
   ].filter(Boolean),
 
   sharp,
-  plugins: [],
+  plugins: [
+    s3Storage({
+      collections: {
+        media: {
+          prefix: 'media',
+        },
+      },
+      bucket: process.env.R2_BUCKET!,
+      config: {
+        credentials: {
+          accessKeyId: process.env.R2_ACCESS_KEY_ID!,
+          secretAccessKey: process.env.R2_SECRET_ACCESS_KEY!,
+        },
+        region: 'auto',
+        endpoint: process.env.R2_ENDPOINT,
+      },
+    }),
+  ],
 })
