@@ -122,7 +122,7 @@ export default function HomePage({ currentLang, onNavigateTo }: HomePageProps) {
                 </h2>
               </div>
 
-              {sunday.body && (
+              {!!sunday.body && (
                 <RichText
                   content={sunday.body}
                   className="text-lg text-[#70665f] font-serif leading-relaxed"
@@ -223,7 +223,7 @@ export default function HomePage({ currentLang, onNavigateTo }: HomePageProps) {
                 </h2>
               </div>
 
-              {prayer.body && (
+              {!!prayer.body && (
                 <RichText
                   content={prayer.body}
                   className="text-lg text-[#70665f] font-serif leading-relaxed"
@@ -398,7 +398,7 @@ export default function HomePage({ currentLang, onNavigateTo }: HomePageProps) {
                             {item.title}
                           </h3>
                           <div className="h-0.5 w-10 bg-brand-red mb-5" />
-                          {item.description && (
+                          {!!item.description && (
                             <RichText
                               content={item.description}
                               className="font-serif text-base text-[#6F685B] leading-relaxed"

@@ -397,7 +397,7 @@ export default function App() {
                         <h5 className="font-serif font-bold text-sm sm:text-base text-[#33271E] leading-snug">
                           {faq.question}
                         </h5>
-                        {faq.answer && (
+                        {!!faq.answer && (
                           <RichText
                             content={faq.answer}
                             className="text-xs sm:text-sm text-[#6F685B] mt-2 font-serif leading-relaxed"

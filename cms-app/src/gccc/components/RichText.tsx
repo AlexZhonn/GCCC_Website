@@ -1,5 +1,7 @@
 "use client";
 
+import React from "react";
+
 /**
  * Minimal Lexical JSON → HTML renderer.
  *
@@ -58,7 +60,7 @@ function renderNode(node: LexicalNode, idx: number): React.ReactNode {
       );
 
     case "heading": {
-      const Tag = (node.tag ?? "h2") as keyof JSX.IntrinsicElements;
+      const Tag = (node.tag ?? "h2") as keyof React.JSX.IntrinsicElements;
       const sizeMap: Record<string, string> = {
         h1: "text-4xl font-bold mb-4",
         h2: "text-3xl font-bold mb-3",
